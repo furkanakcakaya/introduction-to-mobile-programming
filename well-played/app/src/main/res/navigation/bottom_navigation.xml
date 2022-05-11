@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/songsFragment">
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.mobile30_03.fragment.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player" >
+        <argument
+            android:name="songIndex"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/songsFragment"
+        android:name="com.example.mobile30_03.fragment.SongsFragment"
+        android:label="fragment_songs"
+        tools:layout="@layout/fragment_songs" >
+        <action
+            android:id="@+id/songsToPlayer"
+            app:destination="@id/playerFragment"
+            app:popUpTo="@id/songsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.example.mobile30_03.fragment.PlaylistFragment"
+        android:label="fragment_playlist"
+        tools:layout="@layout/fragment_playlist" >
+        <action
+            android:id="@+id/playlistToPlayer"
+            app:destination="@id/playerFragment"
+            app:popUpTo="@id/playlistFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/playlistToInside"
+            app:destination="@id/playlistSongFragment"
+            app:popUpTo="@id/playlistFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistSongFragment"
+        android:name="com.example.mobile30_03.fragment.PlaylistSongFragment"
+        android:label="fragment_playlist_song"
+        tools:layout="@layout/fragment_playlist_song" >
+        <argument
+            android:name="playlistId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/goBackPlaylist"
+            app:destination="@id/playlistFragment"
+            app:popUpTo="@id/bottom_navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionPlaylistSongToPlayer"
+            app:destination="@id/playerFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/songsFragment"
+        android:icon="@drawable/allsong_clip"
+        android:title="Songs" />
+    <item
+        android:id="@+id/playerFragment"
+        android:icon="@drawable/player_clip"
+        android:title="Player" />
+    <item
+        android:id="@+id/playlistFragment"
+        android:icon="@drawable/playlist_clip"
+        android:title="Playlists" />
+</menu>

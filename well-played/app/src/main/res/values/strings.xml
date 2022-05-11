@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Well Played</string>
+    <string name="enter_username_hint">Kullanıcı Adı Giriniz</string>
+    <string name="enter_mail_hint">E-mail Giriniz</string>
+    <string name="enter_phone_hint">Telefon Giriniz</string>
+    <string name="enter_password_hint">Şifre Giriniz</string>
+    <string name="sign_up_button">Kayıt Ol</string>
+    <string name="login_button">Giriş Yap</string>
+    <string name="user_already_exists">Kullanıcı zaten mevcut.</string>
+    <string name="login_failed">Giriş yapılamadı.</string>
+    <string name="music">Müzik</string>
+    <string name="play">Oynat</string>
+    <string name="pause">Durdur</string>
+    <string name="registerSuccess">ID: %d - Başarılı Kayıt</string>
+    <string name="registerMailContent">ID: %d - Username: %s \nPhone: %s</string>
+    <string name="permissionGranted">Thanks for the permission.</string>
+    <string name="permissionRationale">App needs file R/W permission. Please check settings.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
