@@ -10,7 +10,7 @@ import com.example.mobile30_03.database.relations.SongPlaylistCrossRef;
 
 @Database(
         entities = {RUser.class, RPlaylist.class, RSong.class, SongPlaylistCrossRef.class},
-        version = 1,
+        version = 2,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "wellplay_db";
@@ -26,6 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(mContext.getApplicationContext(),
                     AppDatabase.class,DATABASE_NAME).allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return instance;

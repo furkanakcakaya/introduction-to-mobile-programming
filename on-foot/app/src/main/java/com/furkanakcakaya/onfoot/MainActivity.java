@@ -1,17 +1,17 @@
 package com.furkanakcakaya.onfoot;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener  {
 
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor linearAccelerationSensor;
     private Sensor proximitySensor;
     private TextView tvResult;
+    private Button btnNext;
     private static final double proximityE = 0.9;
     private static final double linearAccE = 0.055;
     private boolean isProximityBelowThreshold = false;
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         tvResult = findViewById(R.id.tvResult);
         tvResult.setText("Sensorler devreye aliniyor...");
+
+        btnNext = findViewById(R.id.btnInt);
+        btnNext.setOnClickListener(view ->{
+            Intent intent = new Intent(MainActivity.this, BroadcastActivity.class);
+            startActivity(intent);
+
+        });
+
     }
 
     @Override
@@ -72,44 +81,32 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 isLinearAccBelowThreshold = false;
             }
         }
-        updateUI();
+        update();
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {}
 
-    void updateUI(){
+    void update(){
+        Intent intent = new Intent();
+        intent.setAction("com.furkanakcakaya.onfoot.UPDATE");
         if (isProximityBelowThreshold) {
             if (isLinearAccBelowThreshold) {
                 tvResult.setText("CEPTE, HAREKETSIZ");
+                intent.putExtra("mode", "default");
             }else{
                 tvResult.setText("CEPTE, HAREKETLI");
+                //Spor modu
+                intent.putExtra("mode", "sport");
             }
         }else if (isLinearAccBelowThreshold) {
             tvResult.setText("CEPTE DEGIL, HAREKETSIZ");
+            //Toplanti modu
+            intent.putExtra("mode", "meeting");
         }else{
             tvResult.setText("CEPTE DEGIL, HAREKETLI");
+            intent.putExtra("mode", "default");
         }
-    }
-
-    void notifies(){
-
-
-    }
-
-    void createNotification(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "onfoot")
-                .setSmallIcon(R.drawable.up)
-                .setContentTitle("GET UP MATE!")
-                .setContentText("You are not getting up! Get up!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-        notificationManager.notify(54, builder.build());
-
+        sendBroadcast(intent);
     }
 }
-
-//TELEFON UZAKTAYSA VE HAREKETSIZSE SESLI
-//TELEFON CEBINDEYSE VE HAREKETSIZSE TITRESIM
