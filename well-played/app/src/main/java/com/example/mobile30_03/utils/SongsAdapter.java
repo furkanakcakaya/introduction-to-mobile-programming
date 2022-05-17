@@ -21,7 +21,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobile30_03.R;
-import com.example.mobile30_03.database.RPlaylist;
 import com.example.mobile30_03.database.RSong;
 import com.example.mobile30_03.fragment.SongsFragmentDirections;
 import com.google.android.material.snackbar.Snackbar;
@@ -125,7 +124,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.MusicViewHol
         return mNumberItems;
     }
 
-    //A function that sends an intent to share a song file
     public void shareSong(Context context, Uri uri) {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
