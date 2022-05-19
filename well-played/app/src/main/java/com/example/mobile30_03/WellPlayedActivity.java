@@ -12,13 +12,13 @@ import com.example.mobile30_03.utils.OnFootBroadcastReceiver;
 
 public class WellPlayedActivity extends AppCompatActivity {
     private ActivityWellPlayedBinding binding;
-    private OnFootBroadcastReceiver onFootBroadcastReceiver = new OnFootBroadcastReceiver();
+    private OnFootBroadcastReceiver onFootBroadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityWellPlayedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        onFootBroadcastReceiver = new OnFootBroadcastReceiver();
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navHost);
         NavigationUI.setupWithNavController(binding.bottomBarWP, navHostFragment.getNavController());
     }

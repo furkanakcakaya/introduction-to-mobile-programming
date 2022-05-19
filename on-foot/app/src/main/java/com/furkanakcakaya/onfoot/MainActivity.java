@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onDestroy() {
         super.onDestroy();
         sensorManager.unregisterListener(this);
-        Log.i(TAG, "onDestroy: unregister listener");
     }
 
     @Override
@@ -95,20 +94,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         intent.setAction("com.furkanakcakaya.onfoot.UPDATE");
         if (isLightBelowThreshold) {
             if (isLinearAccBelowThreshold) {
-                tvResult.setText("CEPTE, HAREKETSIZ");
+                tvResult.setText("hareketsiz ve akıllı telefon cepte");
                 intent.putExtra("mode", "default");
-            }else{
-                tvResult.setText("CEPTE, HAREKETLI");
+            } else {
+                tvResult.setText("hareketli ve akıllı telefon cepte”");
                 //Spor modu
                 intent.putExtra("mode", "sport");
             }
-        }else if (isLinearAccBelowThreshold) {
-            tvResult.setText("CEPTE DEGIL, HAREKETSIZ");
-            //Toplanti modu
-            intent.putExtra("mode", "meeting");
-        }else{
-            tvResult.setText("CEPTE DEGIL, HAREKETLI");
-            intent.putExtra("mode", "default");
+        } else {
+            if (isLinearAccBelowThreshold) {
+                tvResult.setText("hareketsiz ve akıllı telefon masada");
+                //Toplanti modu
+                intent.putExtra("mode", "meeting");
+            } else {
+                tvResult.setText("CEPTE DEGIL, HAREKETLI");
+                intent.putExtra("mode", "default");
+            }
         }
         Log.i(TAG, "update: sending broadcast");
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
